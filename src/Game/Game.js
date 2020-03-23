@@ -5,7 +5,7 @@ import GameBoard from '../GameBoard/GameBoard'
 class Game extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {  cur_state : [null,null,null,null,null,null,null,null,null],
+        this.state = {  cur_state : new Array(9).fill(null),
                         xIsNext: true,
                         };
     }
@@ -23,13 +23,19 @@ class Game extends React.Component {
                 xIsNext: !this.state.xIsNext,
             });
         }
-        
+    }
+
+    resetButtonHandler = () => {
+        this.setState({
+            cur_state: new Array(9).fill(null),
+        })
     }
 
     render() {
         return (
             <div>
                 <GameBoard boardState={this.state.cur_state} callBack={this.squareClickHandler}/>
+                <button onClick={this.resetButtonHandler}>Reset Game</button>
             </div>
         );
     }
