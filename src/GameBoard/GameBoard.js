@@ -8,19 +8,19 @@ function GameBoard(props) {
         //How we will do this all depends on how we will make the callback functions
         <div>
             <div className="board_row">
-                <GameSquare/>
-                <GameSquare/>
-                <GameSquare/>
+                <GameSquare value={props.boardState[0]} clickFunc={() => props.callBack(0)}/>
+                <GameSquare value={props.boardState[1]} clickFunc={() => props.callBack(1)}/>
+                <GameSquare value={props.boardState[2]} clickFunc={() => props.callBack(2)}/>
             </div>
             <div className="board_row">
-                <GameSquare/>
-                <GameSquare/>
-                <GameSquare/>
+                <GameSquare value={props.boardState[3]} clickFunc={() => props.callBack(3)}/>
+                <GameSquare value={props.boardState[4]} clickFunc={() => props.callBack(4)}/>
+                <GameSquare value={props.boardState[5]} clickFunc={() => props.callBack(5)}/>
             </div>
             <div className="board_row">
-                <GameSquare/>
-                <GameSquare/>
-                <GameSquare/>
+                <GameSquare value={props.boardState[6]} clickFunc={() => props.callBack(6)}/>
+                <GameSquare value={props.boardState[7]} clickFunc={() => props.callBack(7)}/>
+                <GameSquare value={props.boardState[8]} clickFunc={() => props.callBack(8)}/>
             </div>
         </div>
     );
