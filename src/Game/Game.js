@@ -12,11 +12,18 @@ class Game extends React.Component {
 
     squareClickHandler = (squareNum) => {
         var tempBoard = this.state.cur_state.slice();
-        tempBoard[squareNum] = this.state.xIsNext? 'X' : 'O';
-        this.setState({
-            cur_state : tempBoard,
-            xIsNext: !this.state.xIsNext,
-        });
+        if(tempBoard[squareNum] !== null){
+            this.setState({
+                xIsNext: !this.state.xIsNext,
+            })
+        } else {
+            tempBoard[squareNum] = this.state.xIsNext? 'X' : 'O';
+            this.setState({
+                cur_state : tempBoard,
+                xIsNext: !this.state.xIsNext,
+            });
+        }
+        
     }
 
     render() {
