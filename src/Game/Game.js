@@ -60,22 +60,34 @@ class Game extends React.Component {
         if(this.detectWinFunc(this.state.cur_state)) {
             message = 'WIN';
         } else {
-            message = 'NO WIN';
+            message = '-';
         }
 
         var turn_message;
         if(this.state.xIsNext){
-            turn_message = "it is X's turn";
+            turn_message = "X's turn";
         } else {
-            turn_message = "it is O's turn";
+            turn_message = "O's turn";
         }
 
         return (
             <div>
-                <p>{turn_message}</p>
-                <p>{message}</p>
-                <GameBoard boardState={this.state.cur_state} callBack={this.squareClickHandler}/>
-                <button onClick={this.resetButtonHandler}>Reset Game</button>
+                <h1>TIC-TAC-TOE</h1>
+                <div className="outer_game_container">
+                    <div className="game_container">
+                        <GameBoard boardState={this.state.cur_state} callBack={this.squareClickHandler}/>
+                    </div>
+                    <div className="game_status">
+                        <p>{turn_message}</p>
+                        <p>{message}</p>
+                        <button 
+                            onClick={this.resetButtonHandler}
+                            id="reset_button"
+                        >
+                            Reset Game
+                        </button>
+                    </div>
+                </div>
             </div>
         );
     }

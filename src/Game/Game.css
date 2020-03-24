@@ -1,0 +1,26 @@
+.outer_game_container {
+    display: flex;
+    justify-content: center;
+}
+
+.game_status {
+    display: flex;
+    flex-direction: column;
+    width: 180px;
+    height: 180px;
+    justify-content: center;
+}
+
+#reset_button {
+    /* center the element */
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    /* give it dimensions */
+    width: 50%;
+    background-color: rgb(255, 136, 136);
+    border-radius: 4px;
+}
