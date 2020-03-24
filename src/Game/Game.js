@@ -12,11 +12,7 @@ class Game extends React.Component {
 
     squareClickHandler = (squareNum) => {
         var tempBoard = this.state.cur_state.slice();
-        if(tempBoard[squareNum] !== null){
-            this.setState({
-                xIsNext: !this.state.xIsNext,
-            })
-        } else {
+        if(tempBoard[squareNum] === null && !this.detectWinFunc(this.state.cur_state)){
             tempBoard[squareNum] = this.state.xIsNext? 'X' : 'O';
             this.setState({
                 cur_state : tempBoard,
@@ -57,17 +53,15 @@ class Game extends React.Component {
 
     render() {
         var message;
-        if(this.detectWinFunc(this.state.cur_state)) {
-            message = 'WIN';
+
+        if(this.state.xIsNext){
+            message = "X's turn";
         } else {
-            message = '-';
+            message = "O's turn";
         }
 
-        var turn_message;
-        if(this.state.xIsNext){
-            turn_message = "X's turn";
-        } else {
-            turn_message = "O's turn";
+        if(this.detectWinFunc(this.state.cur_state)) {
+            message = 'WIN';
         }
 
         return (
@@ -78,7 +72,6 @@ class Game extends React.Component {
                         <GameBoard boardState={this.state.cur_state} callBack={this.squareClickHandler}/>
                     </div>
                     <div className="game_status">
-                        <p>{turn_message}</p>
                         <p>{message}</p>
                         <button 
                             onClick={this.resetButtonHandler}
