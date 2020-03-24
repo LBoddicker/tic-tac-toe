@@ -61,7 +61,7 @@ class Game extends React.Component {
         }
 
         if(this.detectWinFunc(this.state.cur_state)) {
-            message = 'WIN';
+            message = this.state.xIsNext ? 'O WON' : 'X WON';
         }
 
         return (
