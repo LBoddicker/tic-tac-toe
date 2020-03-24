@@ -51,6 +51,22 @@ class Game extends React.Component {
         return false;
     }
 
+    gameFinished = (arr) => {
+        for(var i = 0; i < 9; i++){
+            if(arr[i] === null){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    detectTie = (arr) => {
+        if(this.gameFinished(arr) && !this.detectWinFunc(arr)){
+            return true;
+        }
+        return false;
+    }
+
     render() {
         var message;
 
@@ -62,6 +78,10 @@ class Game extends React.Component {
 
         if(this.detectWinFunc(this.state.cur_state)) {
             message = this.state.xIsNext ? 'O WON' : 'X WON';
+        }
+
+        if(this.detectTie(this.state.cur_state)){
+            message = "TIE";
         }
 
         return (
