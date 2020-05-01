@@ -1,12 +1,4 @@
 .game_button {
     height: 60px;
     width: 60px;
-    background-color: none;
-    border-color: black;
-    font-size: 45px;
-    font-weight: bold;
-}
-
-.game_button:focus {
-    outline: none;
 }
