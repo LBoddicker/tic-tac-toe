@@ -1,6 +1,7 @@
 import React from 'react'
 import './Game.css'
 import GameBoard from '../GameBoard/GameBoard'
+import Display from '../Display/Display'
 
 class Game extends React.Component {
     constructor(props) {
@@ -68,39 +69,33 @@ class Game extends React.Component {
     }
 
     render() {
-        var message;
+        var playerTurn;
+        var buttonMessage = "Reset"
 
         if(this.state.xIsNext){
-            message = "X's turn";
+            playerTurn = "X's turn";
         } else {
-            message = "O's turn";
+            playerTurn = "O's turn";
         }
 
         if(this.detectWinFunc(this.state.cur_state)) {
-            message = this.state.xIsNext ? 'O WON' : 'X WON';
+            playerTurn = this.state.xIsNext ? 'O WON' : 'X WON';
+            buttonMessage = "Play Again"
         }
 
         if(this.detectTie(this.state.cur_state)){
-            message = "TIE";
+            playerTurn = "TIE";
         }
 
         return (
             <div>
-                <h1>TIC-TAC-TOE</h1>
-                <div className="outer_game_container">
-                    <div className="game_container">
-                        <GameBoard boardState={this.state.cur_state} callBack={this.squareClickHandler}/>
-                    </div>
-                    <div className="game_status">
-                        <p>{message}</p>
-                        <button 
-                            onClick={this.resetButtonHandler}
-                            id="reset_button"
-                        >
-                            Reset Game
-                        </button>
-                    </div>
-                </div>
+                <Display
+                    boardState={this.state.cur_state}
+                    callBack={this.squareClickHandler}
+                    playerTurn={playerTurn}
+                    buttonMessage={buttonMessage}
+                    resetCallBack={this.resetButtonHandler}
+                />
             </div>
         );
     }
