@@ -85,6 +85,7 @@ class Game extends React.Component {
 
         if(this.detectTie(this.state.cur_state)){
             playerTurn = "TIE";
+            buttonMessage = "Play Again"
         }
 
         return (
