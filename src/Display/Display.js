@@ -23,10 +23,6 @@ const Display = (props) => {
     return (
         <Container component="main" maxWidth="md">
             <CssBaseline />
-            <Typography component="h1" variant="h3" align="center" color="textPrimary" gutterBottom>
-                TIC-TAC-TOE
-            </Typography>
-
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
                 {props.playerTurn}
             </Typography>
