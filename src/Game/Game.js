@@ -1,17 +1,18 @@
 import React from 'react'
 import './Game.css'
-import GameBoard from '../GameBoard/GameBoard'
 import Display from '../Display/Display'
+import {PAGES} from '../Constants'
 
 class Game extends React.Component {
     constructor(props) {
         super(props);
         this.state = {  cur_state : new Array(9).fill(null),
                         xIsNext: true,
+                        gameType: props.gameType,
                         };
     }
 
-    squareClickHandler = (squareNum) => {
+    twoPlayerLocalHander = (squareNum) => {
         var tempBoard = this.state.cur_state.slice();
         if(tempBoard[squareNum] === null && !this.detectWinFunc(this.state.cur_state)){
             tempBoard[squareNum] = this.state.xIsNext? 'X' : 'O';
@@ -19,6 +20,35 @@ class Game extends React.Component {
                 cur_state : tempBoard,
                 xIsNext: !this.state.xIsNext,
             });
+        }
+    }
+
+    singlePlayerHandler = (squareNum) => {
+        var tempBoard = this.state.cur_state.slice();
+        if(tempBoard[squareNum] === null && !this.detectWinFunc(this.state.cur_state))
+        {
+            tempBoard[squareNum] = 'X'
+        }
+
+        if(!this.gameFinished(tempBoard))
+        {
+            var easyChoice = this.getEasyMove(tempBoard)
+            tempBoard[easyChoice] = 'O'
+        }
+
+        this.setState( { cur_state : tempBoard } )
+    }
+
+    squareClickHandler = (squareNum) => {
+        switch(this.state.gameType){
+            case PAGES.SINGLE_PLAYER_EASY:
+                this.singlePlayerHandler(squareNum)
+                break;
+            case PAGES.TWO_PLAYER_LOCAL:
+                this.twoPlayerLocalHander(squareNum)
+                break;
+            default:
+                throw new Error('Invalid gameType')
         }
     }
 
@@ -52,7 +82,7 @@ class Game extends React.Component {
         return false;
     }
 
-    gameFinished = (arr) => {
+    noMoreMoves = (arr) => {
         for(var i = 0; i < 9; i++){
             if(arr[i] === null){
                 return false;
@@ -62,10 +92,31 @@ class Game extends React.Component {
     }
 
     detectTie = (arr) => {
-        if(this.gameFinished(arr) && !this.detectWinFunc(arr)){
+        if(this.noMoreMoves(arr) && !this.detectWinFunc(arr)){
             return true;
         }
         return false;
+    }
+
+    gameFinished = (arr) => {
+        if(this.detectTie(arr) || this.detectWinFunc(arr))
+        {
+            return true
+        }
+        return false
+    }
+
+    //The easy AI will just randomly pick a unoccupied square
+    getEasyMove = (curBoard) => {
+        var emptySpaces = []
+        curBoard.forEach((val, idx) => {
+            if(val === null)
+            {
+                emptySpaces.push(idx)
+            }
+        })
+        var selectedSpace = emptySpaces[Math.floor(Math.random() * emptySpaces.length)]
+        return selectedSpace
     }
 
     render() {
