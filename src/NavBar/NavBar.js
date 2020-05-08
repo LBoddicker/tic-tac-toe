@@ -29,7 +29,7 @@ function NavBar(props) {
           <IconButton onClick={() => props.callBack(PAGES.GAME_SELECT)} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <HomeRoundedIcon />
           </IconButton>
-          <Typography variant="h6" variant="h6" color="inherit" noWrap>
+          <Typography variant="h6" color="inherit" noWrap>
             TIC-TAC-TOE
           </Typography>
         </Toolbar>

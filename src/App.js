@@ -3,14 +3,10 @@ import './App.css';
 import Game from './Game/Game'
 import GameSelect from './GameSelect/GameSelect'
 import NavBar from './NavBar/NavBar'
+import Multiplayer from './Multiplayer/Multiplayer'
 import {PAGES} from './Constants'
 
-import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 
 class App extends React.Component {
 
@@ -37,6 +33,9 @@ class App extends React.Component {
         break;
         case PAGES.TWO_PLAYER_LOCAL:
           curDisplay = <Game gameType={PAGES.TWO_PLAYER_LOCAL}/>
+          break;
+        case PAGES.MULTIPLAYER:
+          curDisplay = <Multiplayer />
           break;
       default:
         throw new Error('Invalid App state selection')
